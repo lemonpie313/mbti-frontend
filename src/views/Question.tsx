@@ -1,25 +1,40 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { LinearProgress, Paper, Typography } from "@mui/material";
+import { Button, LinearProgress, Paper, Typography } from "@mui/material";
+import questions from "../data/questions.ts";
+import { useState } from "react";
 
 const Question = () => {
+  const [currentQuestionId, setCurrentQuestionId] = useState(0);
+
+  const currentQuestion = questions[currentQuestionId];
+
+  const handleAnswer = (selected: string) => {
+    console.log("선택한 답:", selected);
+    if (currentQuestionId == 7) {
+      console.log("끝")
+      return;
+    }
+    setCurrentQuestionId(currentQuestionId + 1);
+  };
+
   return (
     <Box
       sx={{
-        backgroundColor: '#FFDCDC',
-        width: '100vw',
-        minHeight: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        backgroundColor: "#FFDCDC",
+        width: "100vw",
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         padding: 2,
       }}
     >
       <Box
         sx={{
-          maxWidth: '375px',
-          width: '100%',
-          textAlign: 'center',
+          maxWidth: "375px",
+          width: "100%",
+          textAlign: "center",
         }}
       >
         {/* 프로필 원 */}
@@ -27,26 +42,26 @@ const Question = () => {
           sx={{
             width: 120,
             height: 120,
-            borderRadius: '50%',
-            backgroundColor: 'white',
-            margin: '0 auto',
+            borderRadius: "50%",
+            backgroundColor: "white",
+            margin: "0 auto",
             mb: 4,
           }}
         />
 
         {/* 진행도 바 */}
-        <Typography variant="body2" sx={{ textAlign: 'left' }}>
-          80%
+        <Typography variant="body2" sx={{ textAlign: "left" }}>
+          {currentQuestion.percent}
         </Typography>
         <LinearProgress
           variant="determinate"
-          value={80}
+          value={currentQuestion.percent}
           sx={{
             height: 10,
             borderRadius: 5,
-            backgroundColor: '#fff',
-            '& .MuiLinearProgress-bar': {
-              backgroundColor: '#F4B183',
+            backgroundColor: "#fff",
+            "& .MuiLinearProgress-bar": {
+              backgroundColor: "#F4B183",
             },
             mb: 4,
           }}
@@ -56,56 +71,63 @@ const Question = () => {
         <Paper
           elevation={0}
           sx={{
-            backgroundColor: '#FFF3EC',
+            backgroundColor: "#FFF3EC",
             borderRadius: 4,
             p: 3,
-            textAlign: 'left',
+            textAlign: "left",
             mb: 3,
           }}
         >
           <Typography variant="h6" fontWeight="bold">
-            드디어 컴백날, 신곡이 나왔어!
+            {currentQuestion.title}
           </Typography>
           <Typography variant="body2" mt={1}>
-            이날만 손꼽아 기다렸어. <br />
-            저녁 6시, 음원 사이트를 새로고침하니 익숙한 이름이 보이네. <br />
-            떨리는 손으로 재생 버튼을 눌렀고, <br />
-            그 찰나의 첫 소절이 귀에 들어오는 순간!
+            {currentQuestion.description}
           </Typography>
         </Paper>
 
-        {/* 감정 카드 1 */}
+        {/* 객관식 선택지 */}
         <Paper
           elevation={0}
           sx={{
-            backgroundColor: '#FFE2B9',
+            backgroundColor: "#FFE2B9",
             borderRadius: 4,
             p: 2,
-            textAlign: 'left',
+            textAlign: "left",
             mb: 2,
           }}
         >
-          <Typography>
-            “말도 안돼.. 너무 좋잖아?? 이런 갓곡은 여기저기 알려야돼!!”
-            <br />
-            당장 인스타 스토리로 올리기
-          </Typography>
+          <Button
+            sx={{
+              width: "100%",
+              justifyContent: "flex-start",
+              textAlign: "left",
+            }}
+            onClick={() => handleAnswer(currentQuestion.choice_1)}
+          >
+            <Typography>{currentQuestion.choice_1}</Typography>
+          </Button>
         </Paper>
 
-        {/* 감정 카드 2 */}
         <Paper
           elevation={0}
           sx={{
-            backgroundColor: '#FFE2B9',
+            backgroundColor: "#FFE2B9",
             borderRadius: 4,
             p: 2,
-            textAlign: 'left',
+            textAlign: "left",
           }}
         >
-          <Typography>
-            ‘우와… 너무좋다..//’ <br />
-            속으론 난리나지만, 겉으론 조용히 티 내지 않고 혼자 좋아하는중
-          </Typography>
+          <Button
+            sx={{
+              width: "100%",
+              justifyContent: "flex-start",
+              textAlign: "left",
+            }}
+            onClick={() => handleAnswer(currentQuestion.choice_2)}
+          >
+            <Typography>{currentQuestion.choice_2}</Typography>
+          </Button>
         </Paper>
       </Box>
     </Box>
