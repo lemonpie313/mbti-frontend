@@ -1,12 +1,12 @@
-import React from 'react'
-import Box from '@mui/material/Box';
+import React from "react";
+import Box from "@mui/material/Box";
 
 const Result = () => {
-  return (
-    <Box>
-        result
-    </Box>
-  )
-}
+  
+  const answers = JSON.parse(localStorage.getItem('userAnswers') || '[]');
+  localStorage.removeItem('userAnswers');
 
-export default Result
+  return <Box>result</Box>;
+};
+
+export default Result;
