@@ -1,12 +1,19 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { Avatar, Button, Paper, Typography } from "@mui/material";
-import downloadIcon from "../assets/download.png";
-import twitterIcon from "../assets/twitter.png";
-import spotifyIcon from "../assets/spotify.png";
+import downloadIcon from "../assets/icons/download.png";
+import twitterIcon from "../assets/icons/twitter.png";
+import spotifyIcon from "../assets/icons/spotify.png";
+
+import enfp from "../assets/mbti/enfp.png";
+import infp from "../assets/mbti/infp.png";
+import intj from "../assets/mbti/intj.png";
+import intp from "../assets/mbti/intp.png";
+
 
 const Result = () => {
   const answers = JSON.parse(localStorage.getItem("userAnswers") || "[]");
+  console.log(answers);
   localStorage.removeItem("userAnswers");
 
   return (
@@ -22,13 +29,10 @@ const Result = () => {
       <Box sx={{ width: "100%", maxWidth: 375 }}>
         {/* 프로필 원 */}
         <Box
-          sx={{
-            width: 120,
-            height: 120,
-            borderRadius: "50%",
-            backgroundColor: "#fff",
-            margin: "20px auto",
-          }}
+          component="img"
+          src={intp}
+          alt=".."
+          sx={{ width: "100%", borderRadius: 4, mb: 2 }}
         />
 
         {/* 제목 */}
@@ -103,7 +107,8 @@ const Result = () => {
           }}
         >
           대충 이건 텍스트임 아몰라 이거 텍스트 맞음 대충 쓰고있음 뭘 넣어야
-          할지 몰라서 일단 쓰고보자<br /> <br />
+          할지 몰라서 일단 쓰고보자
+          <br /> <br />
           텍스트 길이 늘리기 얍...늘어나라 늘어나라 늘어나라고!!
         </Paper>
 
@@ -131,12 +136,12 @@ const Result = () => {
         </Paper>
 
         {/* 공유 버튼들 */}
-        <Box sx={{display: "flex", justifyContent: "center"}}>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Box
             sx={{
               display: "flex",
               justifyContent: "space-between",
-              width: "80%"
+              width: "80%",
             }}
           >
             <Button
