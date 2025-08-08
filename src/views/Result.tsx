@@ -89,7 +89,7 @@ const Result = () => {
           </Typography>
 
           {/* 추천 노래 리스트 */}
-          <Box sx={{ mt: 2 }}>
+          {/* <Box sx={{ mt: 2 }}>
             {[
               {
                 title: "그냥 괴물을 살려두면 안되는걸까",
@@ -129,7 +129,7 @@ const Result = () => {
                 </Box>
               </Box>
             ))}
-          </Box>
+          </Box> */}
         </Paper>
 
         {/* 설명 */}
