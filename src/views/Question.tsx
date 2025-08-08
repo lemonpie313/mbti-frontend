@@ -21,7 +21,6 @@ const Question = () => {
     );
 
     if (currentQuestionId === 7) {
-      console.log("끝");
       navigate('/result');
       return;
     }
