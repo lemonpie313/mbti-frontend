@@ -3,16 +3,25 @@ import Box from "@mui/material/Box";
 import { Button, LinearProgress, Paper, Typography } from "@mui/material";
 import questions from "../data/questions.ts";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 const Question = () => {
   const [currentQuestionId, setCurrentQuestionId] = useState(0);
-
   const currentQuestion = questions[currentQuestionId];
+  const navigate = useNavigate();
 
-  const handleAnswer = (selected: string) => {
+  const handleAnswer = (selected: number) => {
     console.log("선택한 답:", selected);
-    if (currentQuestionId == 7) {
-      console.log("끝")
+    localStorage.setItem(
+      "userAnswers",
+      JSON.stringify([
+        ...JSON.parse(localStorage.getItem("userAnswers") || "[]"),
+        selected,
+      ])
+    );
+
+    if (currentQuestionId === 7) {
+      navigate('/result');
       return;
     }
     setCurrentQuestionId(currentQuestionId + 1);
@@ -103,7 +112,7 @@ const Question = () => {
               justifyContent: "flex-start",
               textAlign: "left",
             }}
-            onClick={() => handleAnswer(currentQuestion.choice_1)}
+            onClick={() => handleAnswer(1)}
           >
             <Typography>{currentQuestion.choice_1}</Typography>
           </Button>
@@ -124,7 +133,7 @@ const Question = () => {
               justifyContent: "flex-start",
               textAlign: "left",
             }}
-            onClick={() => handleAnswer(currentQuestion.choice_2)}
+            onClick={() => handleAnswer(2)}
           >
             <Typography>{currentQuestion.choice_2}</Typography>
           </Button>
