@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import { Button, LinearProgress, Paper, Typography } from "@mui/material";
 import questions from "../data/questions.ts";
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Question = () => {
   const [currentQuestionId, setCurrentQuestionId] = useState(0);
@@ -21,7 +21,7 @@ const Question = () => {
     );
 
     if (currentQuestionId === 7) {
-      navigate('/result');
+      navigate("/result");
       return;
     }
     setCurrentQuestionId(currentQuestionId + 1);
@@ -34,8 +34,8 @@ const Question = () => {
         width: "100vw",
         minHeight: "100vh",
         display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        flexDirection: "column", // 세로 방향 배치
+        alignItems: "center", // 가로 중앙
         padding: 2,
       }}
     >
@@ -47,7 +47,7 @@ const Question = () => {
         }}
       >
         {/* 프로필 원 */}
-        <Box
+        {/* <Box
           sx={{
             width: 120,
             height: 120,
@@ -56,7 +56,23 @@ const Question = () => {
             margin: "0 auto",
             mb: 4,
           }}
-        />
+        /> */}
+        {/* 제목 */}
+        <Paper
+          elevation={0}
+          sx={{
+            backgroundColor: "transparent",
+            borderRadius: 4,
+            pt: 2,
+            textAlign: "center",
+            mb: 2,
+          }}
+        >
+          IDOL 심리테스트
+          <Typography variant="h6" fontWeight="bold" mt="10px">
+            당신에게 맞는 아이돌을 추천해드려요~
+          </Typography>
+        </Paper>
 
         {/* 진행도 바 */}
         <Typography variant="body2" sx={{ textAlign: "left" }}>
