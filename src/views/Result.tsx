@@ -65,19 +65,11 @@ const Result = () => {
       }}
     >
       <Box sx={{ width: "100%", maxWidth: 375 }}>
-        {/* 프로필 원 */}
-        <Box
-          component="img"
-          src={intp}
-          alt=".."
-          sx={{ width: "100%", borderRadius: 4, mb: 2 }}
-        />
-
         {/* 제목 */}
         <Paper
           elevation={0}
           sx={{
-            backgroundColor: "#FFF3EC",
+            backgroundColor: "transparent",
             borderRadius: 4,
             p: 2,
             textAlign: "center",
@@ -87,21 +79,20 @@ const Result = () => {
           <Typography variant="h6" fontWeight="bold">
             {mbtiResult?.title}
           </Typography>
-
-          {/* 추천 노래 리스트 */}
-          <Box sx={{ mt: 2 }}>
-            <iframe
-              style={{ borderRadius: "12px" }} // ✅ JSX style 객체
-              src="https://open.spotify.com/embed/track/6rdkCkjk6D12xRpdMXy0I2?utm_source=generator"
-              width="100%"
-              height="80"
-              frameBorder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-              title="Spotify Player"
-            />
-          </Box>
         </Paper>
+        {/* 추천 노래 리스트 */}
+        <Box sx={{ my: 2 }}>
+          <iframe
+            style={{ borderRadius: "12px" }} // ✅ JSX style 객체
+            src={mbtiResult?.track}
+            width="100%"
+            height="80"
+            frameBorder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            title="Spotify Player"
+          />
+        </Box>
 
         {/* 설명 */}
         <Paper
