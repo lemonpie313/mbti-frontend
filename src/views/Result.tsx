@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import { Avatar, Button, Paper, Typography } from "@mui/material";
-import downloadIcon from "../assets/icons/download.png";
-import twitterIcon from "../assets/icons/twitter.png";
-import spotifyIcon from "../assets/icons/spotify.png";
-import result, { ResultData } from "../data/results.ts";
+import { Paper, Typography } from "@mui/material";
 
-import enfp from "../assets/mbti/enfp.png";
-import infp from "../assets/mbti/infp.png";
-import intj from "../assets/mbti/intj.png";
-import intp from "../assets/mbti/intp.png";
+import result, { ResultData } from "../data/results.ts";
+import Playlist from "../components/Playlist.tsx";
 
 const Result = () => {
   const [mbti, setMbti] = useState("");
@@ -71,20 +65,21 @@ const Result = () => {
           sx={{
             backgroundColor: "transparent",
             borderRadius: 4,
-            p: 2,
+            pt: 2,
             textAlign: "center",
             mb: 2,
           }}
         >
-          <Typography variant="h6" fontWeight="bold">
+          당신의 성향은...
+          <Typography variant="h6" fontWeight="bold" mt="10px">
             {mbtiResult?.title}
           </Typography>
         </Paper>
-        {/* 추천 노래 리스트 */}
+        {/* 추천 노래 */}
         <Box sx={{ my: 2 }}>
           <iframe
-            style={{ borderRadius: "12px" }} // ✅ JSX style 객체
-            src={mbtiResult?.track}
+            style={{ borderRadius: "12px" }}
+            src={`https://open.spotify.com/embed/track/${mbtiResult?.trackId}?utm_source=generator`}
             width="100%"
             height="80"
             frameBorder="0"
@@ -109,28 +104,46 @@ const Result = () => {
           {mbtiResult?.description}
         </Paper>
 
-        {/* <Typography fontWeight="bold" mb={1}>
-          나랑 잘 맞는 ??
-        </Typography>
         <Paper
           elevation={0}
-          sx={{ backgroundColor: "#FFF3EC", borderRadius: 4, p: 2, mb: 3 }}
+          sx={{
+            backgroundColor: "#FFF3EC",
+            borderRadius: 4,
+            p: 2,
+            mb: 2,
+            fontSize: "0.9rem",
+            lineHeight: 1.5,
+          }}
         >
-          여기 아직도 ui 디자인 못했음
+          <Typography variant="h6" fontWeight="bold" mb="10px">
+            추천하는 아이돌 - {mbtiResult?.artistName}
+          </Typography>
+          {mbtiResult?.recommendation}
+        </Paper>
+        <Paper
+          elevation={0}
+          sx={{
+            backgroundColor: "#FFF3EC",
+            borderRadius: 4,
+            p: 2,
+            mb: 2,
+            fontSize: "0.9rem",
+            lineHeight: 1.5,
+          }}
+        >
+          <Typography variant="h6" fontWeight="bold" mb="10px">
+            {mbtiResult?.artistName} 의 대표곡
+          </Typography>
+          <Playlist
+            artistId={mbtiResult?.artistId || ""}
+            token={
+              ""
+            }
+          />
         </Paper>
 
-        <Typography fontWeight="bold" mb={1}>
-          나랑 안 맞는 ??
-        </Typography>
-        <Paper
-          elevation={0}
-          sx={{ backgroundColor: "#FFF3EC", borderRadius: 4, p: 2, mb: 3 }}
-        >
-          여기 아직도 ui 디자인 못했음
-        </Paper> */}
-
         {/* 공유 버튼들 */}
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+        {/* <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Box
             sx={{
               display: "flex",
@@ -178,7 +191,7 @@ const Result = () => {
               />
             </Button>
           </Box>
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );
