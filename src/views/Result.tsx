@@ -5,11 +5,21 @@ import { Paper, Typography } from "@mui/material";
 import result, { ResultData } from "../data/results.ts";
 import Playlist from "../components/Playlist.tsx";
 
+import { getSpotifyToken } from "../api/spotify.ts";
+
 const Result = () => {
   const [mbti, setMbti] = useState("");
   const [mbtiResult, setMbtiResult] = useState<ResultData | null>(null);
+  const [token, setToken] = useState("");
 
   const answers = JSON.parse(localStorage.getItem("userAnswers") || "[]");
+
+  useEffect(() => {
+    (async () => {
+      const data = await getSpotifyToken();
+      setToken(data.access_token);
+    })();
+  }, []);
 
   useEffect(() => {
     localStorage.removeItem("userAnswers");
@@ -21,8 +31,6 @@ const Result = () => {
       answers[2] + answers[5],
       answers[3] + answers[6],
     ];
-
-    console.log(mbti_answer);
 
     const mbti = [
       ["E", "I"],
@@ -39,7 +47,6 @@ const Result = () => {
       })
       .join("");
 
-    console.log("mbti:", result_of_mbti);
     setMbti(result_of_mbti);
 
     const foundResult = result.find((item) => item.mbti == result_of_mbti);
@@ -136,9 +143,7 @@ const Result = () => {
           </Typography>
           <Playlist
             artistId={mbtiResult?.artistId || ""}
-            token={
-              ""
-            }
+            token={token}
           />
         </Paper>
 
