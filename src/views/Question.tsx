@@ -70,7 +70,7 @@ const Question = () => {
         >
           IDOL 심리테스트
           <Typography variant="h6" fontWeight="bold" mt="10px">
-            당신에게 맞는 아이돌을 추천해드려요~
+            당신의 음악 감상 성향과 함께, 좋아하게 될 케이팝 아이돌을 추천해드려요
           </Typography>
         </Paper>
 
